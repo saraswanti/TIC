@@ -1,0 +1,959 @@
+{
+    "openapi":"3.0.2",
+    "info": {
+      "title":"API Untuk Saraswanti Support System",
+      "version":"1.0"
+    },
+    "servers": [
+      {"url":"https://tic.saraswanti.co.id/api"}
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "token"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Proses untuk Authentication sebelum jalankan api"
+        },
+        {
+            "name": "Master Data",
+            "description": "Tabel-tabel master data"
+        },
+        {
+            "name": "Purchase Order",
+            "description": "Proses untuk create update dan delete data PO"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": ["Authentication"],
+                "description": "Login untuk mendapatkan bearer token sebagai akses ke dalam API",
+                "requestBody":{
+                    "description": "Kebutuhan/Kewajiban yang harus diberikan untuk informasi login",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["email","password"],
+                                "properties": {
+                                    "email":{
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password":{
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sukses mendapatkan access_token",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Login success"
+                                        },
+                                        "access_token":{
+                                            "type": "string",
+                                            "example": "14|wvTzJbpAllxqATUR2xHdYNneAv23kqtEweLj5aOg58f0105b"
+                                        },
+                                        "token_type":{
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description": "Gagal melakukan login",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "properties": {
+                                            "message":{
+                                                "type": "string",
+                                                "example": "Unauthorized"
+                                            }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": ["Authentication"],
+                "description": "Logout untuk menghapus session token",
+                "requestBody":{
+                    "description": "Mandatory informasi yang harus diberikan",
+                    "required": true,
+                    "content": {}
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sukses logout",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "message":{
+                                            "type": "string",
+                                            "example": "logout success"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/type/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data type item berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "type_id",
+                        "in": "query",
+                        "description": "Masukkan ID Items type",
+                        "required": true,
+                        "example": "RM"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "type_id":{
+                                                        "type": "string",
+                                                        "example": "RM"
+                                                    },
+                                                    "type_name": {
+                                                        "type": "string",
+                                                        "example": "Bahan Baku"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                                                        }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID RM"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/type": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data items type",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit items type",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["type_id"],
+                                "properties": {
+                                    "type_id":{
+                                        "type": "string"
+                                    },
+                                    "type_name":{
+                                        "type": "string"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "type_id":{
+                                                        "type": "string",
+                                                        "example": "RM"
+                                                    },
+                                                    "type_name": {
+                                                        "type": "string",
+                                                        "example": "Bahan Baku"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                                                        }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Type created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/unit/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data unit/satuan berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "unit_id",
+                        "in": "query",
+                        "description": "Masukkan ID satuan",
+                        "required": true,
+                        "example": "DOS"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string",
+                                                        "example": "DOS"
+                                                    },
+                                                    "unit_name": {
+                                                        "type": "string",
+                                                        "example": "Kardus"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                                                        }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID DOS"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/unit": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data unit/satuan",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit satuan",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["unit_id"],
+                                "properties": {
+                                    "unit_id":{
+                                        "type": "string"
+                                    },
+                                    "unit_name":{
+                                        "type": "string"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string",
+                                                        "example": "DOS"
+                                                    },
+                                                    "unit_name": {
+                                                        "type": "string",
+                                                        "example": "DOS"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Unit created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/wh/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data gudang berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "warehouse_id",
+                        "in": "query",
+                        "description": "Masukkan ID gudang",
+                        "required": true,
+                        "example": "BGR01"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "warehouse_id":{
+                                                        "type": "string",
+                                                        "example": "BGR01"
+                                                    },
+                                                    "warehouse_name": {
+                                                        "type": "string",
+                                                        "example": "Bogor"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID BGR01"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/wh": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data warehouse/gudang",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit gudang",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["warehouse_id"],
+                                "properties": {
+                                    "warehouse_id":{
+                                        "type": "string"
+                                    },
+                                    "warehouse_name":{
+                                        "type": "string"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "warehouse_id":{
+                                                        "type": "string",
+                                                        "example": "BGR01"
+                                                    },
+                                                    "warehouse_name": {
+                                                        "type": "string",
+                                                        "example": "Gudang Bogor"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Warehouse created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vendor/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data vendor berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "vendor_id",
+                        "in": "query",
+                        "description": "Masukkan ID vendor",
+                        "required": true,
+                        "example": "NA01"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "vendor_id":{
+                                                        "type": "string",
+                                                        "example": "BGR01"
+                                                    },
+                                                    "vendor_name": {
+                                                        "type": "string",
+                                                        "example": "Bogor"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID BGR01"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vendor": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data warehouse/gudang",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit gudang",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["warehouse_id"],
+                                "properties": {
+                                    "warehouse_id":{
+                                        "type": "string"
+                                    },
+                                    "warehouse_name":{
+                                        "type": "string"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "warehouse_id":{
+                                                        "type": "string",
+                                                        "example": "BGR01"
+                                                    },
+                                                    "warehouse_name": {
+                                                        "type": "string",
+                                                        "example": "Gudang Bogor"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Warehouse created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
