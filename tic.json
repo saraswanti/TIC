@@ -101,6 +101,9 @@
         },
         "/logout": {
             "post": {
+                "security": [{
+                    "bearer":[]
+                }],
                 "tags": ["Authentication"],
                 "description": "Logout untuk menghapus session token",
                 "requestBody":{
@@ -202,7 +205,7 @@
                                                         "type": "string",
                                                         "example": "2023-12-11 06:23:53"
                                                     }
-                                                                                        }
+                                                }
                                             }
                                         },
                                         "message":{
@@ -271,7 +274,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sukses mencari data",
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
                         "content": {
                             "application/json":{
                                 "schema": {
@@ -315,12 +318,78 @@
                                                         "type": "string",
                                                         "example": "2023-12-11 06:23:53"
                                                     }
-                                                                                        }
+                                                }
                                             }
                                         },
                                         "message":{
                                             "type": "string",
                                             "example": "Type created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/type/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data item berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["type_id"],
+                                "properties": {
+                                    "type_id":{
+                                        "type": "string",
+                                        "example": "XXX"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Hapus ID "
                                         },
                                         "success":{
                                             "type": "boolean",
@@ -478,7 +547,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sukses mencari data",
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
                         "content": {
                             "application/json":{
                                 "schema": {
@@ -528,6 +597,72 @@
                                         "message":{
                                             "type": "string",
                                             "example": "Unit created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/unit/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data item berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["unit_id"],
+                                "properties": {
+                                    "unit_id":{
+                                        "type": "string",
+                                        "example": "BOX"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Delete successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
@@ -685,7 +820,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sukses mencari data",
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
                         "content": {
                             "application/json":{
                                 "schema": {
@@ -748,6 +883,72 @@
                 }
             }
         },
+        "/wh/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data item berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["warehouse_id"],
+                                "properties": {
+                                    "warehouse_id":{
+                                        "type": "string",
+                                        "example": "ALC01"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/vendor/search": {
             "get": {
                 "security": [{
@@ -770,7 +971,7 @@
                         "schema":{
                             "type": "string"
                         },
-                        "name": "vendor_id",
+                        "name": "vend_id",
                         "in": "query",
                         "description": "Masukkan ID vendor",
                         "required": true,
@@ -792,13 +993,33 @@
                                                         "type": "string",
                                                         "example": "SIG"
                                                     },
-                                                    "vendor_id":{
+                                                    "vend_id":{
                                                         "type": "string",
-                                                        "example": "BGR01"
+                                                        "example": "NA01"
                                                     },
-                                                    "vendor_name": {
+                                                    "vend_name": {
                                                         "type": "string",
-                                                        "example": "Bogor"
+                                                        "example": "Not Available"
+                                                    },
+                                                    "vend_type": {
+                                                        "type": "string",
+                                                        "example": "S"
+                                                    },
+                                                    "address": {
+                                                        "type": "string",
+                                                        "example": "Jalan Buntu no 2 Bogor Indonesia"
+                                                    },
+                                                    "contact": {
+                                                        "type": "string",
+                                                        "example": "Bapak Supangat"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string",
+                                                        "example": "0815880242354"
+                                                    },
+                                                    "city": {
+                                                        "type": "string",
+                                                        "example": "Jakarta"
                                                     },
                                                     "remarks": {
                                                         "type": "string"
@@ -848,20 +1069,20 @@
                     "bearer":[]
                 }],
                 "tags": ["Master Data"],
-                "description": "Tambah dan update data warehouse/gudang",
+                "description": "Tambah dan update data supplier/customer",
                 "requestBody":{
-                    "description": "input yang harus diisi untuk create atau edit gudang",
+                    "description": "input yang harus diisi untuk create atau edit supplier/customer",
                     "required": true,
                     "content": {
                         "multipart/form-data":{
                             "schema":{
                                 "type": "object",
-                                "required": ["warehouse_id"],
+                                "required": ["vend_id"],
                                 "properties": {
-                                    "warehouse_id":{
+                                    "vend_id":{
                                         "type": "string"
                                     },
-                                    "warehouse_name":{
+                                    "vend_name":{
                                         "type": "string"
                                     },
                                     "remarks":{
@@ -892,7 +1113,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Sukses mencari data",
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
                         "content": {
                             "application/json":{
                                 "schema": {
@@ -905,11 +1126,11 @@
                                                         "type": "string",
                                                         "example": "SIG"
                                                     },
-                                                    "warehouse_id":{
+                                                    "vend_id":{
                                                         "type": "string",
                                                         "example": "BGR01"
                                                     },
-                                                    "warehouse_name": {
+                                                    "vend_name": {
                                                         "type": "string",
                                                         "example": "Gudang Bogor"
                                                     },
@@ -941,7 +1162,1404 @@
                                         },
                                         "message":{
                                             "type": "string",
-                                            "example": "Warehouse created successfully"
+                                            "example": "Vendor/Customer created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/vendor/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data vendor berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["vend_id"],
+                                "properties": {
+                                    "vend_id":{
+                                        "type": "string",
+                                        "example": "NA01"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tax/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data tax berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "tax_id",
+                        "in": "query",
+                        "description": "Masukkan ID Tax",
+                        "required": true,
+                        "example": "NT01"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string",
+                                                        "example": "NT01"
+                                                    },
+                                                    "tax_name": {
+                                                        "type": "string",
+                                                        "example": "Tidak ada Pajak"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID NT01"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tax": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data supplier/customer",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit supplier/customer",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["vend_id"],
+                                "properties": {
+                                    "vend_id":{
+                                        "type": "string"
+                                    },
+                                    "vend_name":{
+                                        "type": "string"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string",
+                                                        "example": "NT01"
+                                                    },
+                                                    "tax_name": {
+                                                        "type": "string",
+                                                        "example": "Tidak ada pajak"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Tax created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tax/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data tax berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["tax_id"],
+                                "properties": {
+                                    "tax_id":{
+                                        "type": "string",
+                                        "example": "NT01"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID NT01"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data item berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "item_id",
+                        "in": "query",
+                        "description": "Masukkan ID Item",
+                        "required": true,
+                        "example": "ALC01"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "item_id":{
+                                                        "type": "string",
+                                                        "example": "ALC01"
+                                                    },
+                                                    "item_type":{
+                                                        "type": "string",
+                                                        "example": "MR"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string",
+                                                        "example": "DOS"
+                                                    },
+                                                    "unit_id_conversion":{
+                                                        "type": "string",
+                                                        "example": "PCS"
+                                                    },
+                                                    "qty_conversion":{
+                                                        "type": "string",
+                                                        "example": "12"
+                                                    },
+                                                    "item_name": {
+                                                        "type": "string",
+                                                        "example": "Alkohol"
+                                                    },
+                                                    "price":{
+                                                        "type": "string",
+                                                        "example": "850"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID NT01"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data item/barang",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["item_id","item_type","unit_id","unit_id_conversion","qty_conversion"],
+                                "properties": {
+                                    "item_id":{
+                                        "type": "string",
+                                        "example": "NT01"
+                                    },
+                                    "item_type":{
+                                        "type": "string",
+                                        "example": "MR"
+                                    },
+                                    "unit_id":{
+                                        "type": "string",
+                                        "example": "DOS"
+                                    },
+                                    "unit_id_conversion":{
+                                        "type": "string",
+                                        "example": "PCS"
+                                    },
+                                    "qty_conversion":{
+                                        "type": "string",
+                                        "example": "12"
+                                    },
+                                    "item_name": {
+                                        "type": "string",
+                                        "example": "Alkohol"
+                                    },
+                                    "price":{
+                                        "type": "string",
+                                        "example": "850"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "item_id":{
+                                                        "type": "string",
+                                                        "example": "ALC01"
+                                                    },
+                                                    "item_type":{
+                                                        "type": "string",
+                                                        "example": "MR"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string",
+                                                        "example": "DOS"
+                                                    },
+                                                    "unit_id_conversion":{
+                                                        "type": "string",
+                                                        "example": "PCS"
+                                                    },
+                                                    "qty_conversion":{
+                                                        "type": "string",
+                                                        "example": "12"
+                                                    },
+                                                    "item_name": {
+                                                        "type": "string",
+                                                        "example": "Alkohol"
+                                                    },
+                                                    "price":{
+                                                        "type": "string",
+                                                        "example": "850"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Items created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/item/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data item berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["item_id"],
+                                "properties": {
+                                    "item_id":{
+                                        "type": "string",
+                                        "example": "ALC01"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID NT01"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/po/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data purchase order berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "PU-OR/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10 10:15:01"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "requester":{
+                                                        "type": "string",
+                                                        "example": "Joni"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "LOGISTICS"
+                                                    },
+                                                    "termin":{
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string",
+                                                        "example": "IDR"
+                                                    },
+                                                    "reference_no":{
+                                                        "type": "string",
+                                                        "example": "0239470230"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/po": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Tambah dan update data item/barang",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","doc_date","vend_id","department_id","requester"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18 12:48:04"
+                                    },
+                                    "requester":{
+                                        "type": "string",
+                                        "example": "Joni"
+                                    },
+                                    "department_id":{
+                                        "type": "string",
+                                        "example": "LOGISTICS"
+                                    },
+                                    "vend_id":{
+                                        "type": "string",
+                                        "example": "NA01"
+                                    },
+                                    "termin": {
+                                        "type": "string",
+                                        "example": "30"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "currency":{
+                                        "type": "string",
+                                        "example": "850"
+                                    },
+                                    "currency_rate":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "reference_no": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "PU-OR/202312001/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-18 12:48:04"
+                                                    },
+                                                    "requester":{
+                                                        "type": "string",
+                                                        "example": "Joni"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "LOGISTICS"
+                                                    },
+                                                    "vend_id":{
+                                                        "type": "string",
+                                                        "example": "NA01"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency":{
+                                                        "type": "string",
+                                                        "example": "850"
+                                                    },
+                                                    "currency_rate":{
+                                                        "type": "string",
+                                                        "example": "15000"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userid":{
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    }
+                                                }
+                                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/po/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Menghapus data PO berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/podetail/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data purchase order detail berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "PU-OR/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10 10:15:01"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "requester":{
+                                                        "type": "string",
+                                                        "example": "Joni"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "LOGISTICS"
+                                                    },
+                                                    "termin":{
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string",
+                                                        "example": "IDR"
+                                                    },
+                                                    "reference_no":{
+                                                        "type": "string",
+                                                        "example": "0239470230"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/podetail": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Tambah dan update data item purchase order detail",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","item_id","unit_id","tax_id","warehouse_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    },
+                                    "seq_id":{
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "item_id":{
+                                        "type": "string",
+                                        "example": "ALC01"
+                                    },
+                                    "item_name":{
+                                        "type": "string",
+                                        "example": "Alkohol"
+                                    },
+                                    "unit_id": {
+                                        "type": "string",
+                                        "example": "BOX"
+                                    },
+                                    "tax_id": {
+                                        "type": "string",
+                                        "example": "NT01"
+                                    },
+                                    "warehouse_id": {
+                                        "type": "string",
+                                        "example": "BGR01"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "qty": {
+                                        "type": "string"
+                                    },
+                                    "currency_price":{
+                                        "type": "string",
+                                        "example": "850"
+                                    },
+                                    "currency_price_pph":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "currency_price_ppn":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "currency_total":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "currency_total_price":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "currency_rate":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "reference_no": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "PU-OR/202312001/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-18 12:48:04"
+                                                    },
+                                                    "requester":{
+                                                        "type": "string",
+                                                        "example": "Joni"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "LOGISTICS"
+                                                    },
+                                                    "vend_id":{
+                                                        "type": "string",
+                                                        "example": "NA01"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency":{
+                                                        "type": "string",
+                                                        "example": "850"
+                                                    },
+                                                    "currency_rate":{
+                                                        "type": "string",
+                                                        "example": "15000"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userid":{
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    }
+                                                }
+                                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/podetail/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Menghapus data PO Detail berdasarkan doc id dan seq_id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    },
+                                    "seq_id":{
+                                        "type": "string",
+                                        "example": "2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO detail delete successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
