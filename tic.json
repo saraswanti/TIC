@@ -130,6 +130,279 @@
                 }
             }
         },
+        "/dept/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data department item berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "department_id",
+                        "in": "query",
+                        "description": "Masukkan ID department",
+                        "required": true,
+                        "example": "RM"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "RM"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string",
+                                                        "example": "Bahan Baku"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search ID "
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/dept": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data department",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit department",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["department_id"],
+                                "properties": {
+                                    "department_id":{
+                                        "type": "string"
+                                    },
+                                    "department_name":{
+                                        "type": "string"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "RM"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string",
+                                                        "example": "Bahan Baku"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Department created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/dept/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data item berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["department_id"],
+                                "properties": {
+                                    "department_id":{
+                                        "type": "string",
+                                        "example": "LOGISTICS"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Hapus ID "
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/type/search": {
             "get": {
                 "security": [{
@@ -1902,7 +2175,7 @@
                                                     },
                                                     "doc_date":{
                                                         "type": "string",
-                                                        "example": "2023-12-10 10:15:01"
+                                                        "example": "2023-12-10"
                                                     },
                                                     "seq_id":{
                                                         "type": "string",
@@ -2000,7 +2273,8 @@
                                     },
                                     "doc_date":{
                                         "type": "string",
-                                        "example": "2023-12-18 12:48:04"
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
                                     },
                                     "requester":{
                                         "type": "string",
@@ -2034,7 +2308,8 @@
                                     },
                                     "status": {
                                         "type": "string",
-                                        "example": "1"
+                                        "example": "1",
+                                        "description": "Abaikan jika proses tambah data"
                                     },
                                     "userid":{
                                         "type": "string",
@@ -2115,7 +2390,7 @@
                                                         "example": "admin"
                                                     }
                                                 }
-                                                            }
+                                            }
                                         },
                                         "message":{
                                             "type": "string",
@@ -2444,7 +2719,7 @@
                                                     },
                                                     "doc_date":{
                                                         "type": "string",
-                                                        "example": "2023-12-18 12:48:04"
+                                                        "example": "2023-12-18"
                                                     },
                                                     "requester":{
                                                         "type": "string",
