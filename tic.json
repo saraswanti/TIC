@@ -2297,7 +2297,7 @@
                                     },
                                     "currency":{
                                         "type": "string",
-                                        "example": "850"
+                                        "example": "IDR"
                                     },
                                     "currency_rate":{
                                         "type": "string",
@@ -2372,7 +2372,7 @@
                                                     },
                                                     "currency":{
                                                         "type": "string",
-                                                        "example": "850"
+                                                        "example": "IDR"
                                                     },
                                                     "currency_rate":{
                                                         "type": "string",
@@ -2461,6 +2461,235 @@
                                         "message":{
                                             "type": "string",
                                             "example": "PO delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/po/add": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Proses ini hanya untuk insert PO dan detail nya saja dalam sekali pengiriman",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","doc_date","vend_id","department_id","requester"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "requester":{
+                                        "type": "string",
+                                        "example": "Joni"
+                                    },
+                                    "department_id":{
+                                        "type": "string",
+                                        "example": "LOGISTICS"
+                                    },
+                                    "vend_id":{
+                                        "type": "string",
+                                        "example": "NA01"
+                                    },
+                                    "termin": {
+                                        "type": "string",
+                                        "example": "30"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "currency":{
+                                        "type": "string",
+                                        "example": "IDR"
+                                    },
+                                    "currency_rate":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "reference_no": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1",
+                                        "description": "Abaikan jika proses tambah data"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "detail":{
+                                        "type": "array",
+                                        "description": "Detail item PO",
+                                        "items": {
+                                            "type": "object",
+                                            "required": ["itetm_id", "unit_id","tax_id","warehouse_id","currency_price"],
+                                            "properties": {
+                                                "item_id":{
+                                                    "type": "string",
+                                                    "example": "ALC01"
+                                                },
+                                                "item_name":{
+                                                    "type": "string",
+                                                    "example": "Alkohol"
+                                                },
+                                                "unit_id": {
+                                                    "type": "string",
+                                                    "example": "BOX"
+                                                },
+                                                "tax_id": {
+                                                    "type": "string",
+                                                    "example": "NT01"
+                                                },
+                                                "warehouse_id": {
+                                                    "type": "string",
+                                                    "example": "BGR01"
+                                                },
+                                                "remarks": {
+                                                    "type": "string"
+                                                },
+                                                "qty": {
+                                                    "type": "string"
+                                                },
+                                                "currency_price":{
+                                                    "type": "string",
+                                                    "example": "IDR"
+                                                },
+                                                "currency_price_pph":{
+                                                    "type": "string",
+                                                    "example": "15000"
+                                                },
+                                                "currency_price_ppn":{
+                                                    "type": "string",
+                                                    "example": "15000"
+                                                },
+                                                "currency_total":{
+                                                    "type": "string",
+                                                    "example": "15000"
+                                                },
+                                                "currency_total_price":{
+                                                    "type": "string",
+                                                    "example": "15000"
+                                                },
+                                                "currency_rate":{
+                                                    "type": "string",
+                                                    "example": "15000"
+                                                },
+                                                "reference_no": {
+                                                    "type": "string"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "example": "1"
+                                                },
+                                                "userid":{
+                                                    "type": "string",
+                                                    "example": "admin"
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "PU-OR/202312001/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-18"
+                                                    },
+                                                    "requester":{
+                                                        "type": "string",
+                                                        "example": "Joni"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "LOGISTICS"
+                                                    },
+                                                    "vend_id":{
+                                                        "type": "string",
+                                                        "example": "NA01"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency":{
+                                                        "type": "string",
+                                                        "example": "IDR"
+                                                    },
+                                                    "currency_rate":{
+                                                        "type": "string",
+                                                        "example": "15000"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userid":{
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO created successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
@@ -2742,7 +2971,7 @@
                                                     },
                                                     "currency":{
                                                         "type": "string",
-                                                        "example": "850"
+                                                        "example": "IDR"
                                                     },
                                                     "currency_rate":{
                                                         "type": "string",
