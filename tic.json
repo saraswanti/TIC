@@ -28,6 +28,10 @@
         {
             "name": "Purchase Order",
             "description": "Proses untuk create update dan delete data PO"
+        },
+        {
+            "name": "Account Receivable",
+            "description": "Proses untuk create update dan delete data AR"
         }
     ],
     "paths": {
@@ -3064,6 +3068,656 @@
                                         "message":{
                                             "type": "string",
                                             "example": "PO detail delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ar/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Mencari dan menampilkan data AR berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "unit_building_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "sales_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ar": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Tambah dan update data item/barang",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","doc_date","vend_id","department_id","requester"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "requester":{
+                                        "type": "string",
+                                        "example": "Joni"
+                                    },
+                                    "department_id":{
+                                        "type": "string",
+                                        "example": "LOGISTICS"
+                                    },
+                                    "vend_id":{
+                                        "type": "string",
+                                        "example": "NA01"
+                                    },
+                                    "termin": {
+                                        "type": "string",
+                                        "example": "30"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "currency":{
+                                        "type": "string",
+                                        "example": "IDR"
+                                    },
+                                    "currency_rate":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "reference_no": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1",
+                                        "description": "Abaikan jika proses tambah data"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "unit_building_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "sales_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ar/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Menghapus data PO berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ar/add": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Proses ini hanya untuk insert PO dan detail nya saja dalam sekali pengiriman",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","doc_date","warehouse_id","cust_id","sales_id","tax_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "due_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "doc_type":{
+                                        "type": "string"
+                                    },
+                                    "warehouse_id":{
+                                        "type": "string"
+                                    },
+                                    "sales_id":{
+                                        "type": "string"
+                                    },
+                                    "cust_id":{
+                                        "type": "string"
+                                    },
+                                    "tax_id":{
+                                        "type": "string"
+                                    },
+                                    "tax_no":{
+                                        "type": "string"
+                                    },
+                                    "termin": {
+                                        "type": "string",
+                                        "example": "30"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "currency":{
+                                        "type": "string",
+                                        "example": "IDR"
+                                    },
+                                    "currency_rate":{
+                                        "type": "string",
+                                        "example": "15000"
+                                    },
+                                    "reference_no": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1",
+                                        "description": "Abaikan jika proses tambah data"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "detail":{
+                                        "type": "array",
+                                        "description": "Detail item PO",
+                                        "items": {
+                                            "type": "object",
+                                            "required": ["seq_id","status_test"],
+                                            "properties": {
+                                                "seq_id":{
+                                                    "type": "string"
+                                                },
+                                                "item_id":{
+                                                    "type": "string"
+                                                },
+                                                "qty":{
+                                                    "type": "string"
+                                                },
+                                                "unit_id": {
+                                                    "type": "string"
+                                                },
+                                                "item_type": {
+                                                    "type": "string"
+                                                },
+                                                "for_doc_id": {
+                                                    "type": "string"
+                                                },
+                                                "remarks": {
+                                                    "type": "string"
+                                                },
+                                                "price_sale": {
+                                                    "type": "string"
+                                                },
+                                                "price_ohp":{
+                                                    "type": "string"
+                                                },
+                                                "price_bb":{
+                                                    "type": "string"
+                                                },
+                                                "qty_susut":{
+                                                    "type": "string"
+                                                },
+                                                "status_test": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "unit_building_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "sales_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR created successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
