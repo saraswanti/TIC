@@ -4304,6 +4304,271 @@
                     }
                 }
             }
+        },
+        "/ardetail/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Mencari dan menampilkan data AR detail berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "seq_id",
+                        "in": "query",
+                        "description": "Masukkan SEQ",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "status_test":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_sale":{
+                                                        "type": "string"
+                                                    },
+                                                    "qty":{
+                                                        "type": "string"
+                                                    },
+                                                    "remarks":{
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ardetail": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Tambah dan update data item AR detail",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","seq_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string"
+                                    },
+                                    "seq_id":{
+                                        "type": "string"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "qty":{
+                                        "type": "string"
+                                    },
+                                    "price_sale":{
+                                        "type": "string"
+                                    },
+                                    "status_test": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "status_test":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_sale":{
+                                                        "type": "string"
+                                                    },
+                                                    "qty":{
+                                                        "type": "string"
+                                                    },
+                                                    "remarks":{
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR Detail created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ardetail/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Menghapus data AR Detail berdasarkan doc id dan seq_id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string"
+                                    },
+                                    "seq_id":{
+                                        "type": "string",
+                                        "example": "2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR detail delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
