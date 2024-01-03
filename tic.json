@@ -4061,7 +4061,7 @@
                     "bearer":[]
                 }],
                 "tags": ["Account Receivable"],
-                "description": "Proses ini hanya untuk insert PO dan detail nya saja dalam sekali pengiriman",
+                "description": "Proses ini hanya untuk insert AR dan detail nya saja dalam sekali pengiriman",
                 "requestBody":{
                     "description": "input yang harus diisi untuk create atau edit ",
                     "required": true,
@@ -4477,7 +4477,7 @@
                     "bearer":[]
                 }],
                 "tags": ["Account Receivable"],
-                "description": "Menghapus data PO Detail berdasarkan doc id dan seq_id",
+                "description": "Menghapus data AR Detail berdasarkan doc id dan seq_id",
                 "requestBody":{
                     "description": "input yang harus diisi untuk menghapus ",
                     "required": true,
