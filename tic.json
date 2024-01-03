@@ -4134,42 +4134,18 @@
                                         "description": "Detail item PO",
                                         "items": {
                                             "type": "object",
-                                            "required": ["seq_id","status_test"],
+                                            "required": ["status_test","price_sale","qty"],
                                             "properties": {
-                                                "seq_id":{
+                                                "status_test":{
                                                     "type": "string"
                                                 },
-                                                "item_id":{
+                                                "price_sale":{
                                                     "type": "string"
                                                 },
                                                 "qty":{
                                                     "type": "string"
                                                 },
-                                                "unit_id": {
-                                                    "type": "string"
-                                                },
-                                                "item_type": {
-                                                    "type": "string"
-                                                },
-                                                "for_doc_id": {
-                                                    "type": "string"
-                                                },
-                                                "remarks": {
-                                                    "type": "string"
-                                                },
-                                                "price_sale": {
-                                                    "type": "string"
-                                                },
-                                                "price_ohp":{
-                                                    "type": "string"
-                                                },
-                                                "price_bb":{
-                                                    "type": "string"
-                                                },
-                                                "qty_susut":{
-                                                    "type": "string"
-                                                },
-                                                "status_test": {
+                                                "remarks":{
                                                     "type": "string"
                                                 }
                                             }
@@ -4411,14 +4387,8 @@
                         "multipart/form-data":{
                             "schema":{
                                 "type": "object",
-                                "required": ["doc_id","seq_id"],
+                                "required": ["status_test","price_sale","qty"],
                                 "properties": {
-                                    "doc_id":{
-                                        "type": "string"
-                                    },
-                                    "seq_id":{
-                                        "type": "string"
-                                    },
                                     "remarks":{
                                         "type": "string"
                                     },
@@ -4507,7 +4477,7 @@
                     "bearer":[]
                 }],
                 "tags": ["Account Receivable"],
-                "description": "Menghapus data AR Detail berdasarkan doc id dan seq_id",
+                "description": "Menghapus data PO Detail berdasarkan doc id dan seq_id",
                 "requestBody":{
                     "description": "input yang harus diisi untuk menghapus ",
                     "required": true,
