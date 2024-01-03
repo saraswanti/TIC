@@ -3810,28 +3810,48 @@
                         "multipart/form-data":{
                             "schema":{
                                 "type": "object",
-                                "required": ["doc_id","doc_date","vend_id","department_id","requester"],
+                                "required": ["doc_id","doc_date","cust_id","tax_id","sales_id","warehouse_id"],
                                 "properties": {
                                     "doc_id":{
                                         "type": "string",
-                                        "example": "PU-OR/202312001/SIG"
+                                        "example": "AR-IV/20240221/SIG"
                                     },
                                     "doc_date":{
                                         "type": "string",
                                         "example": "2023-12-18",
                                         "description": "Tanpa disertakan jam"
                                     },
-                                    "requester":{
+                                    "due_date":{
                                         "type": "string",
-                                        "example": "Joni"
+                                        "description": "tanggal jatuh tempo (tanpa disertakan jam)"
                                     },
-                                    "department_id":{
+                                    "tax_id":{
                                         "type": "string",
-                                        "example": "LOGISTICS"
+                                        "description": "ID Tax"
                                     },
-                                    "vend_id":{
+                                    "cust_id":{
                                         "type": "string",
-                                        "example": "NA01"
+                                        "description": "ID Customer"
+                                    },
+                                    "sales_id":{
+                                        "type": "string",
+                                        "description": "ID Salesman / Marketing"
+                                    },
+                                    "warehouse_id":{
+                                        "type": "string",
+                                        "description": "ID Gudang/warehouse"
+                                    },
+                                    "tax_no":{
+                                        "type": "string",
+                                        "description": "Nomer Pajak"
+                                    },
+                                    "tax_date":{
+                                        "type": "string",
+                                        "description": "Tanggal Nota Faktur Pajak"
+                                    },
+                                    "for_doc_id":{
+                                        "type": "string",
+                                        "description" : "Bisa dikosongkan"
                                     },
                                     "termin": {
                                         "type": "string",
@@ -4131,7 +4151,7 @@
                                     },
                                     "detail":{
                                         "type": "array",
-                                        "description": "Detail item PO",
+                                        "description": "Detail item dari AR",
                                         "items": {
                                             "type": "object",
                                             "required": ["status_test","price_sale","qty"],
