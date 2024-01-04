@@ -4014,7 +4014,7 @@
                 "security": [{
                     "bearer":[]
                 }],
-                "tags": ["Purchase Order"],
+                "tags": ["Account Receivable"],
                 "description": "Menghapus data PO berdasarkan doc id",
                 "requestBody":{
                     "description": "input yang harus diisi untuk menghapus ",
