@@ -1652,6 +1652,25 @@
                                     "cust_name":{
                                         "type": "string"
                                     },
+                                    "city":{
+                                        "type": "string"
+                                    },
+                                    "home_phone":{
+                                        "type": "string"
+                                    },
+                                    "mobile_phone":{
+                                        "type": "string"
+                                    },
+                                    "contact":{
+                                        "type": "string"
+                                    },
+                                    "address":{
+                                        "type": "string"
+                                    },
+                                    "cust_type":{
+                                        "type": "string",
+                                        "description": "P = Personal, C = Company"
+                                    },
                                     "remarks":{
                                         "type": "string"
                                     },
@@ -1700,6 +1719,24 @@
                                                     "cust_name": {
                                                         "type": "string",
                                                         "example": "Gudang Bogor"
+                                                    },
+                                                    "city":{
+                                                        "type": "string"
+                                                    },
+                                                    "home_phone":{
+                                                        "type": "string"
+                                                    },
+                                                    "mobile_phone":{
+                                                        "type": "string"
+                                                    },
+                                                    "contact":{
+                                                        "type": "string"
+                                                    },
+                                                    "address":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_type":{
+                                                        "type": "string"
                                                     },
                                                     "remarks": {
                                                         "type": "string"
