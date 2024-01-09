@@ -3281,6 +3281,132 @@
                 }
             }
         },
+        "/po/posting": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data purchase order berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses Posting document id",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "PU-OR/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "requester":{
+                                                        "type": "string",
+                                                        "example": "Joni"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "LOGISTICS"
+                                                    },
+                                                    "termin":{
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string",
+                                                        "example": "IDR"
+                                                    },
+                                                    "reference_no":{
+                                                        "type": "string",
+                                                        "example": "0239470230"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/podetail/search": {
             "get": {
                 "security": [{
@@ -3455,19 +3581,24 @@
                                         "type": "string"
                                     },
                                     "qty": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example":"10",
+                                        "description": "Quantity item/barang"
                                     },
                                     "currency_price":{
                                         "type": "string",
-                                        "example": "850"
+                                        "example": "25000",
+                                        "description": "Harga dalam satuan mata uang"
                                     },
                                     "currency_price_pph":{
                                         "type": "string",
-                                        "example": "15000"
+                                        "example": "15000",
+                                        "description": "Pengurangan nilai/jumlah tagihan karena PPH"
                                     },
                                     "currency_price_ppn":{
                                         "type": "string",
-                                        "example": "15000"
+                                        "example": "15000",
+                                        "description": "Penambahan nilai/jumlah tagihan karena PPN"
                                     },
                                     "currency_total":{
                                         "type": "string",
@@ -3475,11 +3606,13 @@
                                     },
                                     "currency_total_price":{
                                         "type": "string",
-                                        "example": "15000"
+                                        "example": "25000",
+                                        "description": "Jumlah total dari penambahan PPN dan pengurangan PPH"
                                     },
                                     "currency_rate":{
                                         "type": "string",
-                                        "example": "15000"
+                                        "example": "15000",
+                                        "description": "Input dengan default IDR jika mata uang Rupiah"
                                     },
                                     "reference_no": {
                                         "type": "string"
@@ -4428,7 +4561,13 @@
                                         "type": "string"
                                     },
                                     "nominal_diskon":{
-                                        "type": "string"
+                                        "type": "string",
+                                        "description": "Diskon yang diberikan dalam bentuk nilai"
+                                    },
+                                    "con_id":{
+                                        "type": "string",
+                                        "example": "F",
+                                        "description": "Merujuk pada master id kategori AR"
                                     }
                                 }
                             }
@@ -4482,6 +4621,9 @@
                                                         "type": "string"
                                                     },
                                                     "nominal_diskon":{
+                                                        "type": "string"
+                                                    },
+                                                    "con_id":{
                                                         "type": "string"
                                                     }
                                                 }
