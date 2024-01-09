@@ -1664,7 +1664,22 @@
                                     "contact":{
                                         "type": "string"
                                     },
+                                    "npwp":{
+                                        "type": "string"
+                                    },
                                     "address":{
+                                        "type": "string"
+                                    },
+                                    "coa_id":{
+                                        "type": "string"
+                                    },
+                                    "coa_advance":{
+                                        "type": "string"
+                                    },
+                                    "coa_grn":{
+                                        "type": "string"
+                                    },
+                                    "coa_cashbon":{
                                         "type": "string"
                                     },
                                     "cust_type":{
@@ -1735,6 +1750,9 @@
                                                     "address":{
                                                         "type": "string"
                                                     },
+                                                    "npwp":{
+                                                        "type": "string"
+                                                    },
                                                     "cust_type":{
                                                         "type": "string"
                                                     },
@@ -1744,6 +1762,18 @@
                                                     "status": {
                                                         "type": "string",
                                                         "example": "1"
+                                                    },
+                                                    "coa_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "coa_grn": {
+                                                        "type": "string"
+                                                    },
+                                                    "coa_advance": {
+                                                        "type": "string"
+                                                    },
+                                                    "coa_cashbon": {
+                                                        "type": "string"
                                                     },
                                                     "userinput": {
                                                         "type": "string",
