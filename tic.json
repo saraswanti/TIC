@@ -1676,9 +1676,6 @@
                                     "coa_advance":{
                                         "type": "string"
                                     },
-                                    "coa_cashbon":{
-                                        "type": "string"
-                                    },
                                     "cust_type":{
                                         "type": "string",
                                         "description": "P = Personal, C = Company"
@@ -1764,9 +1761,6 @@
                                                         "type": "string"
                                                     },
                                                     "coa_advance": {
-                                                        "type": "string"
-                                                    },
-                                                    "coa_cashbon": {
                                                         "type": "string"
                                                     },
                                                     "userinput": {
