@@ -1676,9 +1676,6 @@
                                     "coa_advance":{
                                         "type": "string"
                                     },
-                                    "coa_grn":{
-                                        "type": "string"
-                                    },
                                     "coa_cashbon":{
                                         "type": "string"
                                     },
@@ -1764,9 +1761,6 @@
                                                         "example": "1"
                                                     },
                                                     "coa_id": {
-                                                        "type": "string"
-                                                    },
-                                                    "coa_grn": {
                                                         "type": "string"
                                                     },
                                                     "coa_advance": {
