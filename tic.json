@@ -1995,6 +1995,15 @@
                                     "remarks":{
                                         "type": "string"
                                     },
+                                    "phone":{
+                                        "type": "string"
+                                    },
+                                    "city":{
+                                        "type": "string"
+                                    },
+                                    "address":{
+                                        "type": "string"
+                                    },
                                     "status":{
                                         "type": "string"
                                     },
@@ -2042,6 +2051,15 @@
                                                         "example": "Sokran Sorokan"
                                                     },
                                                     "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    },
+                                                    "address": {
                                                         "type": "string"
                                                     },
                                                     "status": {
