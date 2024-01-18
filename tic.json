@@ -2902,6 +2902,590 @@
                 }
             }
         },
+        "/cflow/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data Cash Flow berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "cflow_id",
+                        "in": "query",
+                        "description": "Masukkan ID Cash Flow",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "cflow_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cflow_name": {
+                                                        "type": "string",
+                                                        "example": "Not Available"
+                                                    },
+                                                    "cflow_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "cflow_group": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cflow": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data Cash Flow",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit customer",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["cflow_id"],
+                                "properties": {
+                                    "cflow_id":{
+                                        "type": "string"
+                                    },
+                                    "cflow_name":{
+                                        "type": "string"
+                                    },
+                                    "cflow_type":{
+                                        "type": "string",
+                                        "description": "Isi dengan I = masuk(in), O = keluar(out)"
+                                    },
+                                    "cflow_group": {
+                                        "type": "string",
+                                        "description": "Isi dengan salah satu (Investasi, Operasional, Pendanaan)"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "cflow_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cflow_name": {
+                                                        "type": "string",
+                                                        "example": "Not Available"
+                                                    },
+                                                    "cflow_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "cflow_group": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Salesman created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cflow/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data cash flow berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["cflow_id"],
+                                "properties": {
+                                    "cflow_id":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cash/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Mencari dan menampilkan data Cash Bank berdasarkan id",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "cash_id",
+                        "in": "query",
+                        "description": "Masukkan ID Cash",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "cash_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cash_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "cash_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "coa_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "coa_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cash": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Tambah dan update data Cash Flow",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit customer",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["cash_id"],
+                                "properties": {
+                                    "cash_id":{
+                                        "type": "string"
+                                    },
+                                    "cash_name":{
+                                        "type": "string"
+                                    },
+                                    "cash_type":{
+                                        "type": "string",
+                                        "description": "Isi dengan B = Bank, C = Cash"
+                                    },
+                                    "coa_id": {
+                                        "type": "string",
+                                        "description": "referensi ke master akun (COA)"
+                                    },
+                                    "coa_name": {
+                                        "type": "string",
+                                        "description": "referensi ke master akun (COA)"
+                                    },
+                                    "remarks":{
+                                        "type": "string"
+                                    },
+                                    "status":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "cash_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cash_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "cash_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "coa_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "coa_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Cashbank created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cash/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Master Data"],
+                "description": "Menghapus data cash bank berdasarkan id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["cash_id"],
+                                "properties": {
+                                    "cash_id":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/po": {
             "post": {
                 "security": [{
@@ -4774,6 +5358,407 @@
                                         "message":{
                                             "type": "string",
                                             "example": "AR detail delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/arum/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Mencari dan menampilkan data AR berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "unit_building_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "sales_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/arum": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Tambah dan update data item/barang",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","doc_date","cust_id","tax_id","cash_id","cflow_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "AR-AV/20240221/SIG"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "cust_id":{
+                                        "type": "string",
+                                        "description": "ID Customer referensi ke master customer"
+                                    },
+                                    "tax_id":{
+                                        "type": "string",
+                                        "description": "ID Tax referensi ke master tax"
+                                    },
+                                    "cflow_id":{
+                                        "type": "string",
+                                        "description": "ID Cashflow referensi ke master cash flow"
+                                    },
+                                    "cash_id":{
+                                        "type": "string",
+                                        "description": "Cash ID referensi ke master cashbank"
+                                    },
+                                    "tax_no":{
+                                        "type": "string",
+                                        "description": "Nomer Pajak"
+                                    },
+                                    "tax_date":{
+                                        "type": "string",
+                                        "description": "Tanggal Nota Faktur Pajak"
+                                    },
+                                    "for_doc_id":{
+                                        "type": "string",
+                                        "description" : "Bisa dikosongkan"
+                                    },
+                                    "nominal": {
+                                        "type": "string",
+                                        "example": "30000"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "0",
+                                        "description": "Abaikan jika proses tambah data"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "nominal":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cflow_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "cash_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "outstanding_advance":{
+                                                        "type": "string"
+                                                    },
+                                                    "coa_advance": {
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "reference_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR Uang Muka created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/arum/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Menghapus data AR Uang Muka berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "AR-AV/202312001/SIG"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR UM delete successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
