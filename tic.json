@@ -5094,6 +5094,158 @@
                 }
             }
         },
+        "/ar/posting": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Proses ini untuk Posting AR berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","userid"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "termin": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "unit_building_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "sales_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "reference_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR Posted successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/ardetail/search": {
             "get": {
                 "security": [{
@@ -5759,6 +5911,152 @@
                                         "message":{
                                             "type": "string",
                                             "example": "AR UM delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/arum/posting": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Posting AR Uang Muka berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "userid",
+                        "in": "query",
+                        "description": "User ID",
+                        "required": true
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses Posting document id",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "nominal":{
+                                                        "type": "string"
+                                                    },
+                                                    "cust_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "cflow_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "cash_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "outstanding_advance":{
+                                                        "type": "string"
+                                                    },
+                                                    "coa_advance": {
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_date": {
+                                                        "type": "string"
+                                                    },
+                                                    "tax_no": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "reference_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
                                         },
                                         "success":{
                                             "type": "boolean",
