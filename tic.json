@@ -4779,7 +4779,7 @@
                         "multipart/form-data":{
                             "schema":{
                                 "type": "object",
-                                "required": ["doc_date","item_id","for_doc_id"],
+                                "required": ["doc_date","item_id","for_doc_id","id"],
                                 "properties": {
                                     "doc_id":{
                                         "type": "string",
@@ -4795,6 +4795,9 @@
                                         "type": "string",
                                         "description": "informasi nomer Purchase Order (PO)"
                                     },
+                                    "id": {
+                                        "type": "string"
+                                    },                                    
                                     "item_id": {
                                         "type": "string",
                                         "example": "4096"
