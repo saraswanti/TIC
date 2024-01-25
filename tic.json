@@ -2776,132 +2776,6 @@
                 }
             }
         },
-        "/po/search": {
-            "get": {
-                "security": [{
-                    "bearer":[]
-                }],
-                "tags": ["Purchase Order"],
-                "description": "Mencari dan menampilkan data purchase order berdasarkan nomer document",
-                "parameters": [
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "company",
-                        "in": "query",
-                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
-                        "required": true,
-                        "example": "SIG"
-                    },
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "doc_id",
-                        "in": "query",
-                        "description": "Masukkan Document Id",
-                        "required": true,
-                        "example": ""
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sukses mencari data/data diketemukan",
-                        "content": {
-                            "application/json":{
-                                "schema": {
-                                    "properties": {
-                                        "data":{
-                                            "type": "array",
-                                            "items":{
-                                                    "properties": {
-                                                    "co_id":{
-                                                        "type": "string",
-                                                        "example": "SIG"
-                                                    },
-                                                    "doc_id":{
-                                                        "type": "string",
-                                                        "example": "PU-OR/202312002/SIG"
-                                                    },
-                                                    "doc_date":{
-                                                        "type": "string",
-                                                        "example": "2023-12-10"
-                                                    },
-                                                    "seq_id":{
-                                                        "type": "string",
-                                                        "example": "1"
-                                                    },
-                                                    "requester":{
-                                                        "type": "string",
-                                                        "example": "Joni"
-                                                    },
-                                                    "department_id":{
-                                                        "type": "string",
-                                                        "example": "LOGISTICS"
-                                                    },
-                                                    "termin":{
-                                                        "type": "string",
-                                                        "example": "30"
-                                                    },
-                                                    "currency": {
-                                                        "type": "string",
-                                                        "example": "IDR"
-                                                    },
-                                                    "reference_no":{
-                                                        "type": "string",
-                                                        "example": "0239470230"
-                                                    },
-                                                    "total": {
-                                                        "type": "string"
-                                                    },
-                                                    "currency_rate": {
-                                                        "type": "string"
-                                                    },
-                                                    "vend_id": {
-                                                        "type": "string"
-                                                    },
-                                                    "remarks": {
-                                                        "type": "string"
-                                                    },
-                                                    "status": {
-                                                        "type": "string"
-                                                    },
-                                                    "userinput": {
-                                                        "type": "string",
-                                                        "example": "admin"
-                                                    },
-                                                    "useredit": {
-                                                        "type": "string",
-                                                        "example": "admin"
-                                                    },
-                                                    "timeinput": {
-                                                        "type": "string",
-                                                        "example": "2023-12-11 06:23:53"
-                                                    },
-                                                    "timeedit": {
-                                                        "type": "string",
-                                                        "example": "2023-12-11 06:23:53"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "message":{
-                                            "type": "string",
-                                            "example": "Search Document"
-                                        },
-                                        "success":{
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/cflow/search": {
             "get": {
                 "security": [{
@@ -3473,6 +3347,132 @@
                                         "message":{
                                             "type": "string",
                                             "example": "Delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/po/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data purchase order berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "PU-OR/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "requester":{
+                                                        "type": "string",
+                                                        "example": "Joni"
+                                                    },
+                                                    "department_id":{
+                                                        "type": "string",
+                                                        "example": "LOGISTICS"
+                                                    },
+                                                    "termin":{
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string",
+                                                        "example": "IDR"
+                                                    },
+                                                    "reference_no":{
+                                                        "type": "string",
+                                                        "example": "0239470230"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
                                         },
                                         "success":{
                                             "type": "boolean",
@@ -4432,6 +4432,768 @@
                                         "message":{
                                             "type": "string",
                                             "example": "PO detail delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/gr/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data goods receive note berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "GD-RC/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "total_price":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_ppn":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "qty": {
+                                                        "type": "string"
+                                                    },
+                                                    "price": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "doc_return": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/gr/listbypo": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data goods receive note berdasarkan nomer purchase order",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "GD-RC/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "total_price":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_ppn":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "qty": {
+                                                        "type": "string"
+                                                    },
+                                                    "price": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "doc_return": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/gr": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Tambah dan update data goods receive note",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_date","item_id","for_doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "GD-RC/202312001/SIG",
+                                        "description": "field ini tidak diperlukan jika menambah data baru, bisa diabaikan"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "for_doc_id":{
+                                        "type": "string",
+                                        "description": "informasi nomer Purchase Order (PO)"
+                                    },
+                                    "item_id": {
+                                        "type": "string",
+                                        "example": "4096"
+                                    },
+                                    "unit_id": {
+                                        "type": "string"
+                                    },
+                                    "currency":{
+                                        "type": "string"
+                                    },
+                                    "currency_rate":{
+                                        "type": "string"
+                                    },
+                                    "qty": {
+                                        "type": "string"
+                                    },
+                                    "currency_price": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1",
+                                        "description": "Abaikan jika proses tambah data"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "GD-RC/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "total_price":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_ppn":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "qty": {
+                                                        "type": "string"
+                                                    },
+                                                    "price": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "doc_return": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/gr/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Menghapus data GRN berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "GD-RC/202312001/SIG"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "GRN delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/gr/posting": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data goods receive berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "userid",
+                        "in": "query",
+                        "description": "Masukkan User ID",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses Posting document id",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "GD-RC/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "total_price":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_ppn":{
+                                                        "type": "string"
+                                                    },
+                                                    "price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "tax_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "vend_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "item_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "qty": {
+                                                        "type": "string"
+                                                    },
+                                                    "price": {
+                                                        "type": "string"
+                                                    },
+                                                    "total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_rate": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_price_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_total_price": {
+                                                        "type": "string"
+                                                    },
+                                                    "doc_return": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
                                         },
                                         "success":{
                                             "type": "boolean",
@@ -5678,7 +6440,7 @@
                         "multipart/form-data":{
                             "schema":{
                                 "type": "object",
-                                "required": ["doc_id","doc_date","cust_id","tax_id","cash_id","cflow_id"],
+                                "required": ["doc_id","doc_date","cust_id","cash_id","cflow_id"],
                                 "properties": {
                                     "doc_id":{
                                         "type": "string",
