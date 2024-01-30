@@ -5751,7 +5751,7 @@
                                     "qty": {
                                         "type": "string",
                                         "example":"10",
-                                        "description": "Quantity item/barang"
+                                        "description": "Quantity item/barang, input qty 0 untuk menghapus"
                                     }
                                 }
                             }
