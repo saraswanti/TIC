@@ -4445,621 +4445,6 @@
                 }
             }
         },
-        "/whtrf/search": {
-            "get": {
-                "security": [{
-                    "bearer":[]
-                }],
-                "tags": ["Purchase Order"],
-                "description": "Mencari dan menampilkan data tranfer wh berdasarkan nomer document",
-                "parameters": [
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "company",
-                        "in": "query",
-                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
-                        "required": true,
-                        "example": "SIG"
-                    },
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "doc_id",
-                        "in": "query",
-                        "description": "Masukkan Document Id",
-                        "required": true,
-                        "example": ""
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sukses mencari data/data diketemukan",
-                        "content": {
-                            "application/json":{
-                                "schema": {
-                                    "properties": {
-                                        "data":{
-                                            "type": "array",
-                                            "items":{
-                                                "properties": {
-                                                    "co_id":{
-                                                        "type": "string",
-                                                        "example": "SIG"
-                                                    },
-                                                    "doc_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "doc_date":{
-                                                        "type": "string"
-                                                    },
-                                                    "seq_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "doc_type":{
-                                                        "type": "string"
-                                                    },
-                                                    "to_warehouse_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "from_warehouse_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "for_doc_id": {
-                                                        "type": "string"
-                                                    },
-                                                    "remarks":{
-                                                        "type": "string"
-                                                    },
-                                                    "status": {
-                                                        "type": "string"
-                                                    },
-                                                    "userinput": {
-                                                        "type": "string",
-                                                        "example": "admin"
-                                                    },
-                                                    "useredit": {
-                                                        "type": "string",
-                                                        "example": "admin"
-                                                    },
-                                                    "timeinput": {
-                                                        "type": "string",
-                                                        "example": "2023-12-11 06:23:53"
-                                                    },
-                                                    "timeedit": {
-                                                        "type": "string",
-                                                        "example": "2023-12-11 06:23:53"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "message":{
-                                            "type": "string",
-                                            "example": "Search Document"
-                                        },
-                                        "success":{
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/whtrf": {
-            "post": {
-                "security": [{
-                    "bearer":[]
-                }],
-                "tags": ["Purchase Order"],
-                "description": "Tambah dan update data WH",
-                "requestBody":{
-                    "description": "input yang harus diisi untuk create atau edit ",
-                    "required": true,
-                    "content": {
-                        "multipart/form-data":{
-                            "schema":{
-                                "type": "object",
-                                "required": ["doc_id","doc_date","to_warehouse_id","from_warehouse_id"],
-                                "properties": {
-                                    "doc_id":{
-                                        "type": "string",
-                                        "example": "PU-OR/202312001/SIG"
-                                    },
-                                    "doc_date":{
-                                        "type": "string",
-                                        "example": "2023-12-18",
-                                        "description": "Tanpa disertakan jam"
-                                    },
-                                    "doc_type":{
-                                        "type": "string"
-                                    },
-                                    "for_doc_id":{
-                                        "type": "string"
-                                    },
-                                    "from_warehouse_id":{
-                                        "type": "string"
-                                    },
-                                    "to_warehouse_id": {
-                                        "type": "string"
-                                    },
-                                    "remarks": {
-                                        "type": "string"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "1",
-                                        "description": "Abaikan jika proses tambah data"
-                                    },
-                                    "userid":{
-                                        "type": "string",
-                                        "example": "admin"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters": [
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "company",
-                        "in": "query",
-                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
-                        "required": true,
-                        "example": "SIG"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
-                        "content": {
-                            "application/json":{
-                                "schema": {
-                                    "properties": {
-                                        "data":{
-                                            "type": "array",
-                                            "items":{
-                                                "properties": {
-                                                    "co_id":{
-                                                        "type": "string",
-                                                        "example": "SIG"
-                                                    },
-                                                    "doc_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "doc_date":{
-                                                        "type": "string"
-                                                    },
-                                                    "seq_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "doc_type":{
-                                                        "type": "string"
-                                                    },
-                                                    "to_warehouse_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "from_warehouse_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "for_doc_id": {
-                                                        "type": "string"
-                                                    },
-                                                    "remarks":{
-                                                        "type": "string"
-                                                    },
-                                                    "status": {
-                                                        "type": "string"
-                                                    },
-                                                    "userinput": {
-                                                        "type": "string",
-                                                        "example": "admin"
-                                                    },
-                                                    "useredit": {
-                                                        "type": "string",
-                                                        "example": "admin"
-                                                    },
-                                                    "timeinput": {
-                                                        "type": "string",
-                                                        "example": "2023-12-11 06:23:53"
-                                                    },
-                                                    "timeedit": {
-                                                        "type": "string",
-                                                        "example": "2023-12-11 06:23:53"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "message":{
-                                            "type": "string",
-                                            "example": "wH created successfully"
-                                        },
-                                        "success":{
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/whtrf/delete": {
-            "post": {
-                "security": [{
-                    "bearer":[]
-                }],
-                "tags": ["Purchase Order"],
-                "description": "Menghapus data wh transfer berdasarkan doc id",
-                "requestBody":{
-                    "description": "input yang harus diisi untuk menghapus ",
-                    "required": true,
-                    "content": {
-                        "multipart/form-data":{
-                            "schema":{
-                                "type": "object",
-                                "required": ["doc_id"],
-                                "properties": {
-                                    "doc_id":{
-                                        "type": "string",
-                                        "example": "WH-OR/202312001/SIG"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters": [
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "company",
-                        "in": "query",
-                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
-                        "required": true,
-                        "example": "SIG"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sukses menghapus data",
-                        "content": {
-                            "application/json":{
-                                "schema": {
-                                    "properties": {
-                                        "data":{
-                                            "type": "array",
-                                            "items":{
-                                                    "properties": {}
-                                            }
-                                        },
-                                        "message":{
-                                            "type": "string",
-                                            "example": "WH Trx delete successfully"
-                                        },
-                                        "success":{
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/whtrf/posting": {
-            "post": {
-                "security": [{
-                    "bearer":[]
-                }],
-                "tags": ["Purchase Order"],
-                "description": "Mencari dan menampilkan data warehouse transaksi berdasarkan nomer document",
-                "parameters": [
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "company",
-                        "in": "query",
-                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
-                        "required": true,
-                        "example": "SIG"
-                    },
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "doc_id",
-                        "in": "query",
-                        "description": "Masukkan Document Id",
-                        "required": true,
-                        "example": ""
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sukses Posting document id",
-                        "content": {
-                            "application/json":{
-                                "schema": {
-                                    "properties": {
-                                        "data":{
-                                            "type": "array",
-                                            "items":{
-                                                    "properties": {
-                                                        "co_id":{
-                                                            "type": "string",
-                                                            "example": "SIG"
-                                                        },
-                                                        "doc_id":{
-                                                            "type": "string"
-                                                        },
-                                                        "doc_date":{
-                                                            "type": "string"
-                                                        },
-                                                        "seq_id":{
-                                                            "type": "string"
-                                                        },
-                                                        "doc_type":{
-                                                            "type": "string"
-                                                        },
-                                                        "to_warehouse_id":{
-                                                            "type": "string"
-                                                        },
-                                                        "from_warehouse_id":{
-                                                            "type": "string"
-                                                        },
-                                                        "for_doc_id": {
-                                                            "type": "string"
-                                                        },
-                                                        "remarks":{
-                                                            "type": "string"
-                                                        },
-                                                        "status": {
-                                                            "type": "string"
-                                                        },
-                                                        "userinput": {
-                                                            "type": "string",
-                                                            "example": "admin"
-                                                        },
-                                                        "useredit": {
-                                                            "type": "string",
-                                                            "example": "admin"
-                                                        },
-                                                        "timeinput": {
-                                                            "type": "string",
-                                                            "example": "2023-12-11 06:23:53"
-                                                        },
-                                                        "timeedit": {
-                                                            "type": "string",
-                                                            "example": "2023-12-11 06:23:53"
-                                                        }
-                                                    }
-                                            }
-                                        },
-                                        "message":{
-                                            "type": "string",
-                                            "example": "Search Document"
-                                        },
-                                        "success":{
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/whtrfdetail/search": {
-            "get": {
-                "security": [{
-                    "bearer":[]
-                }],
-                "tags": ["Purchase Order"],
-                "description": "Mencari dan menampilkan data warehouse transaksi detail berdasarkan nomer document",
-                "parameters": [
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "company",
-                        "in": "query",
-                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
-                        "required": true,
-                        "example": "SIG"
-                    },
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "doc_id",
-                        "in": "query",
-                        "description": "Masukkan Document Id",
-                        "required": true,
-                        "example": ""
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sukses mencari data/data diketemukan",
-                        "content": {
-                            "application/json":{
-                                "schema": {
-                                    "properties": {
-                                        "data":{
-                                            "type": "array",
-                                            "items":{
-                                                "properties": {
-                                                    "co_id":{
-                                                        "type": "string",
-                                                        "example": "SIG"
-                                                    },
-                                                    "doc_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "seq_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "item_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "item_name":{
-                                                        "type": "string"
-                                                    },
-                                                    "qty":{
-                                                        "type": "string"
-                                                    },
-                                                    "remarks":{
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "message":{
-                                            "type": "string",
-                                            "example": "Search Document"
-                                        },
-                                        "success":{
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/whtrfdetail": {
-            "post": {
-                "security": [{
-                    "bearer":[]
-                }],
-                "tags": ["Purchase Order"],
-                "description": "Tambah dan update data item warehouse transaksi detail",
-                "requestBody":{
-                    "description": "input yang harus diisi untuk create atau edit ",
-                    "required": true,
-                    "content": {
-                        "multipart/form-data":{
-                            "schema":{
-                                "type": "object",
-                                "required": ["doc_id","item_id","unit_id"],
-                                "properties": {
-                                    "doc_id":{
-                                        "type": "string",
-                                        "example": "WH-OR/202312001/SIG"
-                                    },
-                                    "item_id":{
-                                        "type": "string"
-                                    },
-                                    "item_name":{
-                                        "type": "string"
-                                    },
-                                    "item_type":{
-                                        "type": "string"
-                                    },
-                                    "unit_id": {
-                                        "type": "string",
-                                        "example": "BOX"
-                                    },
-                                    "remarks": {
-                                        "type": "string"
-                                    },
-                                    "qty": {
-                                        "type": "string",
-                                        "example":"10",
-                                        "description": "Quantity item/barang"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "parameters": [
-                    {
-                        "schema":{
-                            "type": "string"
-                        },
-                        "name": "company",
-                        "in": "query",
-                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
-                        "required": true,
-                        "example": "SIG"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
-                        "content": {
-                            "application/json":{
-                                "schema": {
-                                    "properties": {
-                                        "data":{
-                                            "type": "array",
-                                            "items":{
-                                                "properties": {
-                                                    "co_id":{
-                                                        "type": "string",
-                                                        "example": "SIG"
-                                                    },
-                                                    "doc_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "seq_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "item_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "item_name":{
-                                                        "type": "string"
-                                                    },
-                                                    "unit_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "qty":{
-                                                        "type": "string"
-                                                    },
-                                                    "remarks":{
-                                                        "type": "string"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "message":{
-                                            "type": "string",
-                                            "example": "WH Transaksi created successfully"
-                                        },
-                                        "success":{
-                                            "type": "boolean",
-                                            "example": true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/gr/search": {
             "get": {
                 "security": [{
@@ -5812,6 +5197,621 @@
                                         "message":{
                                             "type": "string",
                                             "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/whtrf/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data tranfer wh berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "to_warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "from_warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks":{
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/whtrf": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Tambah dan update data WH",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","doc_date","to_warehouse_id","from_warehouse_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "PU-OR/202312001/SIG"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "doc_type":{
+                                        "type": "string"
+                                    },
+                                    "for_doc_id":{
+                                        "type": "string"
+                                    },
+                                    "from_warehouse_id":{
+                                        "type": "string"
+                                    },
+                                    "to_warehouse_id": {
+                                        "type": "string"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1",
+                                        "description": "Abaikan jika proses tambah data"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string"
+                                                    },
+                                                    "to_warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "from_warehouse_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks":{
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "wH created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/whtrf/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Menghapus data wh transfer berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "WH-OR/202312001/SIG"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "WH Trx delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/whtrf/posting": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data warehouse transaksi berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses Posting document id",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                        "co_id":{
+                                                            "type": "string",
+                                                            "example": "SIG"
+                                                        },
+                                                        "doc_id":{
+                                                            "type": "string"
+                                                        },
+                                                        "doc_date":{
+                                                            "type": "string"
+                                                        },
+                                                        "seq_id":{
+                                                            "type": "string"
+                                                        },
+                                                        "doc_type":{
+                                                            "type": "string"
+                                                        },
+                                                        "to_warehouse_id":{
+                                                            "type": "string"
+                                                        },
+                                                        "from_warehouse_id":{
+                                                            "type": "string"
+                                                        },
+                                                        "for_doc_id": {
+                                                            "type": "string"
+                                                        },
+                                                        "remarks":{
+                                                            "type": "string"
+                                                        },
+                                                        "status": {
+                                                            "type": "string"
+                                                        },
+                                                        "userinput": {
+                                                            "type": "string",
+                                                            "example": "admin"
+                                                        },
+                                                        "useredit": {
+                                                            "type": "string",
+                                                            "example": "admin"
+                                                        },
+                                                        "timeinput": {
+                                                            "type": "string",
+                                                            "example": "2023-12-11 06:23:53"
+                                                        },
+                                                        "timeedit": {
+                                                            "type": "string",
+                                                            "example": "2023-12-11 06:23:53"
+                                                        }
+                                                    }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/whtrfdetail/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Mencari dan menampilkan data warehouse transaksi detail berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "item_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "item_name":{
+                                                        "type": "string"
+                                                    },
+                                                    "qty":{
+                                                        "type": "string"
+                                                    },
+                                                    "remarks":{
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/whtrfdetail": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Purchase Order"],
+                "description": "Tambah dan update data item warehouse transaksi detail",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","item_id","unit_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "WH-OR/202312001/SIG"
+                                    },
+                                    "item_id":{
+                                        "type": "string"
+                                    },
+                                    "item_name":{
+                                        "type": "string"
+                                    },
+                                    "item_type":{
+                                        "type": "string"
+                                    },
+                                    "unit_id": {
+                                        "type": "string",
+                                        "example": "BOX"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "qty": {
+                                        "type": "string",
+                                        "example":"10",
+                                        "description": "Quantity item/barang"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "item_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "item_name":{
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "qty":{
+                                                        "type": "string"
+                                                    },
+                                                    "remarks":{
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "WH Transaksi created successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
