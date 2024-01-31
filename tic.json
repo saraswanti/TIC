@@ -6027,6 +6027,9 @@
                                         "type": "string",
                                         "example": "30"
                                     },
+                                    "contact": {
+                                        "type": "string"
+                                    },
                                     "remarks": {
                                         "type": "string"
                                     },
@@ -6139,6 +6142,9 @@
                                                         "type": "string"
                                                     },
                                                     "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "contact": {
                                                         "type": "string"
                                                     },
                                                     "status": {
@@ -6297,6 +6303,9 @@
                                         "example": "30"
                                     },
                                     "remarks": {
+                                        "type": "string"
+                                    },
+                                    "contact": {
                                         "type": "string"
                                     },
                                     "currency":{
