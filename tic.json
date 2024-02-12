@@ -32,6 +32,10 @@
         {
             "name": "Account Receivable",
             "description": "Proses untuk create update dan delete data AR"
+        },
+        {
+            "name": "Account Payable",
+            "description": "Proses untuk create update dan delete data AP"
         }
     ],
     "paths": {
@@ -7446,6 +7450,820 @@
                                         "message":{
                                             "type": "string",
                                             "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ap/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Mencari dan menampilkan data account payable berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "AP-IV/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string",
+                                                        "example": "S",
+                                                        "description": "Input dengan huruf S yang artinya Stock"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string",
+                                                        "example": "NT01"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string",
+                                                        "example": "2024-01-24"
+                                                    },
+                                                    "tax_no":{
+                                                        "type": "string",
+                                                        "example": "023009039/220/TAXXXX"
+                                                    },
+                                                    "vend_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string",
+                                                        "example": "BGR01"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string",
+                                                        "description": ""
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "nominal": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ap": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Tambah dan update data item/barang",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_date","vend_id","warehouse_id","tax_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "AP-IV/202312001/SIG",
+                                        "description": "Jika penambahan baru maka doc_id tidak mandatory"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "due_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "tax_id":{
+                                        "type": "string",
+                                        "example": "NT01"
+                                    },
+                                    "tax_no":{
+                                        "type": "string",
+                                        "example": "020JSDL33944"
+                                    },
+                                    "tax_date":{
+                                        "type": "string",
+                                        "example": "2023-12-19"
+                                    },
+                                    "vend_id":{
+                                        "type": "string",
+                                        "example": "NA01"
+                                    },
+                                    "warehouse_id":{
+                                        "type": "string",
+                                        "example": "BGR01"
+                                    },
+                                    "for_doc_id": {
+                                        "type": "string"
+                                    },
+                                    "remarks": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "1",
+                                        "description": "Abaikan jika proses tambah data"
+                                    },
+                                    "userid":{
+                                        "type": "string",
+                                        "example": "admin"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "AP-IV/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string",
+                                                        "example": "S",
+                                                        "description": "Input dengan huruf S yang artinya Stock"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string",
+                                                        "example": "NT01"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string",
+                                                        "example": "2024-01-24"
+                                                    },
+                                                    "tax_no":{
+                                                        "type": "string",
+                                                        "example": "023009039/220/TAXXXX"
+                                                    },
+                                                    "vend_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string",
+                                                        "example": "BGR01"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string",
+                                                        "description": ""
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "nominal": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AP created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ap/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Menghapus data PO berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "AP-IV/202312001/SIG"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AP delete successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ap/posting": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Mencari dan menampilkan data AP berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "userid",
+                        "in": "query",
+                        "description": "Masukkan User ID",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses Posting document id",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                        "co_id":{
+                                                            "type": "string",
+                                                            "example": "SIG"
+                                                        },
+                                                        "doc_id":{
+                                                            "type": "string",
+                                                            "example": "AP-IV/202312002/SIG"
+                                                        },
+                                                        "doc_date":{
+                                                            "type": "string",
+                                                            "example": "2023-12-10"
+                                                        },
+                                                        "due_date":{
+                                                            "type": "string",
+                                                            "example": "2023-12-10"
+                                                        },
+                                                        "seq_id":{
+                                                            "type": "string",
+                                                            "example": "1"
+                                                        },
+                                                        "doc_type":{
+                                                            "type": "string",
+                                                            "example": "S",
+                                                            "description": "Input dengan huruf S yang artinya Stock"
+                                                        },
+                                                        "tax_id":{
+                                                            "type": "string",
+                                                            "example": "NT01"
+                                                        },
+                                                        "tax_date":{
+                                                            "type": "string",
+                                                            "example": "2024-01-24"
+                                                        },
+                                                        "tax_no":{
+                                                            "type": "string",
+                                                            "example": "023009039/220/TAXXXX"
+                                                        },
+                                                        "vend_id":{
+                                                            "type": "string"
+                                                        },
+                                                        "warehouse_id": {
+                                                            "type": "string",
+                                                            "example": "BGR01"
+                                                        },
+                                                        "for_doc_id": {
+                                                            "type": "string",
+                                                            "description": ""
+                                                        },
+                                                        "remarks": {
+                                                            "type": "string"
+                                                        },
+                                                        "status": {
+                                                            "type": "string"
+                                                        },
+                                                        "total_ppn": {
+                                                            "type": "string"
+                                                        },
+                                                        "total_pph": {
+                                                            "type": "string"
+                                                        },
+                                                        "nominal": {
+                                                            "type": "string"
+                                                        },
+                                                        "userinput": {
+                                                            "type": "string",
+                                                            "example": "admin"
+                                                        },
+                                                        "useredit": {
+                                                            "type": "string",
+                                                            "example": "admin"
+                                                        },
+                                                        "timeinput": {
+                                                            "type": "string",
+                                                            "example": "2023-12-11 06:23:53"
+                                                        },
+                                                        "timeedit": {
+                                                            "type": "string",
+                                                            "example": "2023-12-11 06:23:53"
+                                                        }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/apdetail/search": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Mencari dan menampilkan data AP detail berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "doc_id",
+                        "in": "query",
+                        "description": "Masukkan Document Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "item_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "qty":{
+                                                        "type": "string",
+                                                        "example": "30"
+                                                    },
+                                                    "price": {
+                                                        "type": "string",
+                                                        "example": "20000"
+                                                    },
+                                                    "total":{
+                                                        "type": "string",
+                                                        "example": "6000000"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/apdetail": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Tambah dan update data item ap detail",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","item_id","unit_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "AP-IV/202312001/SIG"
+                                    },
+                                    "seq_id":{
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "item_id":{
+                                        "type": "string",
+                                        "example": "ALC01"
+                                    },
+                                    "item_name":{
+                                        "type": "string",
+                                        "example": "Alkohol"
+                                    },
+                                    "unit_id": {
+                                        "type": "string",
+                                        "example": "BOX"
+                                    },
+                                    "qty": {
+                                        "type": "string",
+                                        "example":"10",
+                                        "description": "Quantity item/barang"
+                                    },
+                                    "price":{
+                                        "type": "string",
+                                        "example": "25000",
+                                        "description": "Harga dalam satuan mata uang"
+                                    },
+                                    "total":{
+                                        "type": "string",
+                                        "example": "250000"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "item_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "qty":{
+                                                        "type": "string",
+                                                        "example": "10"
+                                                    },
+                                                    "price": {
+                                                        "type": "string",
+                                                        "example": "25000"
+                                                    },
+                                                    "total":{
+                                                        "type": "string",
+                                                        "example": "250000"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "PO created successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/apdetail/delete": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Menghapus data AP Detail berdasarkan doc id dan seq_id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk menghapus ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string",
+                                        "example": "AP-IV/202312001/SIG"
+                                    },
+                                    "seq_id":{
+                                        "type": "string",
+                                        "example": "2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses menghapus data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {}
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AP detail delete successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
