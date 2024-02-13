@@ -7601,6 +7601,147 @@
                 }
             }
         },
+        "/ap/searchbyid": {
+            "get": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Payable"],
+                "description": "Mencari dan menampilkan data account payable berdasarkan nomer document",
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    },
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "id",
+                        "in": "query",
+                        "description": "Masukkan Id",
+                        "required": true,
+                        "example": ""
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data/data diketemukan",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                    "properties": {
+                                                    "co_id":{
+                                                        "type": "string",
+                                                        "example": "SIG"
+                                                    },
+                                                    "doc_id":{
+                                                        "type": "string",
+                                                        "example": "AP-IV/202312002/SIG"
+                                                    },
+                                                    "doc_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "due_date":{
+                                                        "type": "string",
+                                                        "example": "2023-12-10"
+                                                    },
+                                                    "seq_id":{
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string",
+                                                        "example": "S",
+                                                        "description": "Input dengan huruf S yang artinya Stock"
+                                                    },
+                                                    "tax_id":{
+                                                        "type": "string",
+                                                        "example": "NT01"
+                                                    },
+                                                    "tax_date":{
+                                                        "type": "string",
+                                                        "example": "2024-01-24"
+                                                    },
+                                                    "tax_no":{
+                                                        "type": "string",
+                                                        "example": "023009039/220/TAXXXX"
+                                                    },
+                                                    "vend_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "warehouse_id": {
+                                                        "type": "string",
+                                                        "example": "BGR01"
+                                                    },
+                                                    "for_doc_id": {
+                                                        "type": "string",
+                                                        "description": ""
+                                                    },
+                                                    "id" : {
+                                                        "type": "string"
+                                                    },
+                                                    "remarks": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_ppn": {
+                                                        "type": "string"
+                                                    },
+                                                    "total_pph": {
+                                                        "type": "string"
+                                                    },
+                                                    "nominal": {
+                                                        "type": "string"
+                                                    },
+                                                    "userinput": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "useredit": {
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "timeinput": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    },
+                                                    "timeedit": {
+                                                        "type": "string",
+                                                        "example": "2023-12-11 06:23:53"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/ap": {
             "post": {
                 "security": [{
@@ -7666,6 +7807,11 @@
                                     "userid":{
                                         "type": "string",
                                         "example": "admin"
+                                    },
+                                    "id":{
+                                        "type": "string",
+                                        "example": "4130",
+                                        "description": "Request dari user tic untuk menambahkan field ID"
                                     }
                                 }
                             }
@@ -7742,6 +7888,9 @@
                                                     "for_doc_id": {
                                                         "type": "string",
                                                         "description": ""
+                                                    },
+                                                    "id" : {
+                                                        "type": "string"
                                                     },
                                                     "remarks": {
                                                         "type": "string"
@@ -7956,6 +8105,9 @@
                                                         "for_doc_id": {
                                                             "type": "string",
                                                             "description": ""
+                                                        },
+                                                        "id" : {
+                                                            "type": "string"
                                                         },
                                                         "remarks": {
                                                             "type": "string"
