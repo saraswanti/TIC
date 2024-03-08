@@ -3510,6 +3510,11 @@
                                         "type": "string",
                                         "example": "PU-OR/202312001/SIG"
                                     },
+                                    "doc_type":{
+                                        "type": "string",
+                                        "example": "S",
+                                        "description": "S = Stock / non Stock, J = Jasa / Services"
+                                    },
                                     "doc_date":{
                                         "type": "string",
                                         "example": "2023-12-18",
@@ -3585,6 +3590,11 @@
                                                     "doc_id":{
                                                         "type": "string",
                                                         "example": "PU-OR/202312001/SIG"
+                                                    },
+                                                    "doc_type":{
+                                                        "type": "string",
+                                                        "example": "S",
+                                                        "description": "S = Stock / non Stock, J = Jasa / Services"
                                                     },
                                                     "doc_date":{
                                                         "type": "string",
@@ -7798,6 +7808,10 @@
                                     },
                                     "remarks": {
                                         "type": "string"
+                                    },
+                                    "installment_month": {
+                                        "type": "string",
+                                        "description": "Untuk input jumlah angsuran, jika tidak ada angka disertakan angka 0"
                                     },
                                     "status": {
                                         "type": "string",
