@@ -7773,6 +7773,11 @@
                                         "example": "AP-IV/202312001/SIG",
                                         "description": "Jika penambahan baru maka doc_id tidak mandatory"
                                     },
+                                    "doc_type":{
+                                        "type": "string",
+                                        "example": "S",
+                                        "description": "S untuk Stock dan O untuk Others atau Service"
+                                    },
                                     "doc_date":{
                                         "type": "string",
                                         "example": "2023-12-18",
@@ -7859,10 +7864,6 @@
                                                         "type": "string",
                                                         "example": "SIG"
                                                     },
-                                                    "doc_id":{
-                                                        "type": "string",
-                                                        "example": "AP-IV/202312002/SIG"
-                                                    },
                                                     "doc_date":{
                                                         "type": "string",
                                                         "example": "2023-12-10"
@@ -7878,7 +7879,7 @@
                                                     "doc_type":{
                                                         "type": "string",
                                                         "example": "S",
-                                                        "description": "Input dengan huruf S yang artinya Stock"
+                                                        "description": "Input dengan huruf S yang artinya Stock dan O yang artinya Others atau Service"
                                                     },
                                                     "tax_id":{
                                                         "type": "string",
@@ -8223,6 +8224,9 @@
                                                     "unit_id":{
                                                         "type": "string"
                                                     },
+                                                    "coa_id":{
+                                                        "type": "string"
+                                                    },
                                                     "qty":{
                                                         "type": "string",
                                                         "example": "30"
@@ -8282,6 +8286,10 @@
                                         "type": "string",
                                         "example": "ALC01"
                                     },
+                                    "coa_id":{
+                                        "type": "string",
+                                        "example": "1.1.100.002"
+                                    },
                                     "item_name":{
                                         "type": "string",
                                         "example": "Alkohol"
@@ -8335,6 +8343,9 @@
                                                     "seq_id":{
                                                         "type": "string",
                                                         "example": "1"
+                                                    },
+                                                    "coa_id":{
+                                                        "type": "string"
                                                     },
                                                     "item_id":{
                                                         "type": "string"
