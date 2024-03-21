@@ -1692,6 +1692,12 @@
                                     },
                                     "userid":{
                                         "type": "string"
+                                    },
+                                    "sales_id":{
+                                        "type": "string"
+                                    },
+                                    "ar_pic":{
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -1765,6 +1771,12 @@
                                                         "type": "string"
                                                     },
                                                     "coa_advance": {
+                                                        "type": "string"
+                                                    },
+                                                    "sales_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "ar_pic":{
                                                         "type": "string"
                                                     },
                                                     "userinput": {
@@ -8222,9 +8234,6 @@
                                                         "type": "string"
                                                     },
                                                     "unit_id":{
-                                                        "type": "string"
-                                                    },
-                                                    "coa_id":{
                                                         "type": "string"
                                                     },
                                                     "qty":{
