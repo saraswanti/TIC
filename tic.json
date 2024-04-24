@@ -1366,6 +1366,21 @@
                                     "vend_name":{
                                         "type": "string"
                                     },
+                                    "vend_type":{
+                                        "type": "string"
+                                    },
+                                    "coa_id":{
+                                        "type": "string"
+                                    },
+                                    "coa_advance":{
+                                        "type": "string"
+                                    },
+                                    "coa_grn":{
+                                        "type": "string"
+                                    },
+                                    "coa_cashbon":{
+                                        "type": "string"
+                                    },
                                     "remarks":{
                                         "type": "string"
                                     },
@@ -1414,6 +1429,21 @@
                                                     "vend_name": {
                                                         "type": "string",
                                                         "example": "Gudang Bogor"
+                                                    },
+                                                    "vend_type": {
+                                                        "type": "string"
+                                                    },
+                                                    "coa_id":{
+                                                        "type": "string"
+                                                    },
+                                                    "coa_advance":{
+                                                        "type": "string"
+                                                    },
+                                                    "coa_grn":{
+                                                        "type": "string"
+                                                    },
+                                                    "coa_cashbon":{
+                                                        "type": "string"
                                                     },
                                                     "remarks": {
                                                         "type": "string"
