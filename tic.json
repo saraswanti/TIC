@@ -3600,6 +3600,11 @@
                                     "userid":{
                                         "type": "string",
                                         "example": "admin"
+                                    },
+                                    "count_item_procsig":{
+                                        "type": "string",
+                                        "example": "5",
+                                        "description": "Ini kiriman dari procsig tentang jumlah total item yang terkirim ke api (bukan qty)"
                                     }
                                 }
                             }
@@ -6678,6 +6683,80 @@
                                         "message":{
                                             "type": "string",
                                             "example": "AR Posted successfully"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ar/ref": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Proses ini untuk Update REFERENCE dan REMARKS AR berdasarkan doc id",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create atau edit ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["doc_id","userid"],
+                                "properties": {
+                                    "doc_id":{
+                                        "type": "string"
+                                    },
+                                    "reference_no":{
+                                        "type": "string",
+                                        "example": "AR-IV/202312001/SIG"
+                                    },
+                                    "remarks":{
+                                        "type": "string",
+                                        "example": "Perubahan pada harga dari items xxxxx"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses update data",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "AR Updated successfully"
                                         },
                                         "success":{
                                             "type": "boolean",
