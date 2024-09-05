@@ -6715,6 +6715,10 @@
                                     "doc_id":{
                                         "type": "string"
                                     },
+                                    "cust_id":{
+                                        "type": "string",
+                                        "example": "XXX"
+                                    },                                    
                                     "reference_no":{
                                         "type": "string",
                                         "example": "AR-IV/202312001/SIG"
