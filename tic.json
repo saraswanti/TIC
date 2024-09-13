@@ -6715,10 +6715,6 @@
                                     "doc_id":{
                                         "type": "string"
                                     },
-                                    "cust_id":{
-                                        "type": "string",
-                                        "example": "XXX"
-                                    },                                    
                                     "reference_no":{
                                         "type": "string",
                                         "example": "AR-IV/202312001/SIG"
@@ -7585,6 +7581,82 @@
                                         "message":{
                                             "type": "string",
                                             "example": "Search Document"
+                                        },
+                                        "success":{
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/arpph23": {
+            "post": {
+                "security": [{
+                    "bearer":[]
+                }],
+                "tags": ["Account Receivable"],
+                "description": "Menambahkan data PPH23",
+                "requestBody":{
+                    "description": "input yang harus diisi untuk create ",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "required": ["for_doc_id","doc_date","nominal"],
+                                "properties": {
+                                    "for_doc_id":{
+                                        "type": "string",
+                                        "example": "XX-XXX"
+                                    },
+                                    "doc_date":{
+                                        "type": "string",
+                                        "example": "2023-12-18",
+                                        "description": "Tanpa disertakan jam"
+                                    },
+                                    "nominal":{
+                                        "type": "string",
+                                        "description": "Nominal yang diinput"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "schema":{
+                            "type": "string"
+                        },
+                        "name": "company",
+                        "in": "query",
+                        "description": "Informasi perusahaan yang harus diisi dan harus dengan huruf kapital",
+                        "required": true,
+                        "example": "SIG"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sukses mencari data, jika tidak ada data di dalam table maka otomatis buat data baru, jika sudah ada maka akan diupdate",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "properties": {
+                                                }
+                                            }
+                                        },
+                                        "message":{
+                                            "type": "string",
+                                            "example": "Deduction PPH 23 updated successfully."
                                         },
                                         "success":{
                                             "type": "boolean",
