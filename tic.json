@@ -1701,6 +1701,9 @@
                                     "npwp":{
                                         "type": "string"
                                     },
+                                    "nitku":{
+                                        "type": "string"
+                                    },
                                     "address":{
                                         "type": "string"
                                     },
